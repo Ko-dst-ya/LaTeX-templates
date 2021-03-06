@@ -1,0 +1,216 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{cmap}					% поиск в PDF
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+%\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}} % Функция знака sign (signum)
+\DeclareMathOperator{\card}{\mathop{card}} % Мощность множества
+\DeclareMathOperator{\im}{\mathop{Im}} % Образ отображения
+\DeclareMathOperator{\divergence}{\mathop{div}} % Дивергенция
+\DeclareMathOperator{\rot}{\mathop{rot}} % Ротор
+
+
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%%Заголовок
+\author{Математика в \LaTeX{}}
+\title{1 Неделя \LaTeX{}}
+\date{26 июня 2020}
+
+\begin{document} % Конец преамбулы, начало текста.
+
+\maketitle
+
+
+
+\section{Теоретико-множественные понятия}\label{sets}
+
+$\aleph_{0}$ - обозначение мощности множества натуральных чисел $\mathbb{N}$:
+
+\[ 
+\card{\mathbb{N}} = \aleph_{0},
+\]
+
+где для произольного множества A $card{A}$ -- есть мощность A (от англ. cardinality -- мощность). Например, мощность пустого множества равна нулю:
+
+\[ 
+\card{\emptyset} = 0.
+\]
+
+Ещё примеры:
+
+\[ 
+\card{(\mathbb{N} \cup \mathbb{N})} = \aleph_{0},
+\]
+
+\[ 
+\card{(\mathbb{N} \cap \mathbb{Q})} = \card{\mathbb{N}} = \aleph_{0},
+\]
+
+где $\mathbb{Q}$ - множество всех рациональных чисел.
+
+А обозначение $2^{\aleph_{0}}$ используется для обозначения мощности множества всех подмножеств натуральных чисел и называется мощностью континуума. Часто вместо $2^{\aleph_{0}}$ пишут $\mathfrak{c}$. 
+Что интересно, мощность множества действительных чисел в точности равна $\mathfrak{c}$:
+
+\[
+\card{\mathbb{R}} = 2^{\aleph_{0}} = \mathfrak{c}.
+\]
+
+
+
+\section{Математические формулы}\label{math_formulas}
+
+Как думаете, чему равен предел такой суммы:
+
+\begin{equation}\label{eq:lim_sum_pi_4}
+	\lim_{n\to\infty} 
+		n \left(\frac{1}{n^2 + 1} + \frac{1}{n^2 + 4} + \dots + \frac{1}{2n^2}
+						\right),
+\end{equation}
+
+или, в эквивалентной форме:
+
+\[ 
+	\lim_{n\to\infty} n \sum_{i=1}^n \frac{1}{1+\left(\dfrac{i}{n}\right)^2}
+\]
+
+Он, на самом деле, как мы увилем в разделе \ref{integrals}, равен $\dfrac{\pi}{4}$.
+
+
+
+\section{Математика в физике}\label{phys_and_math}
+
+Известный закон Фика для диффузии лёгкой примеси в <<тяжёлом>> относительно примеси фоне записывается следующим образом (<<одномерный случай>>):
+
+\begin{equation}%\label{eq:Fick's_Law}
+j = -D\frac{\partial n}{\partial x},
+\end{equation}
+
+где j -- плотность потока примеси $\left[ \text{м}^{-2} \cdot \text{с}^{-1}\right]$.
+
+Аналогичным образом выглядит закон Фурье для теплопроводности (<<одномерный случай>>):
+
+\begin{equation}\label{eq:Fourier's_Law}
+q = -\varkappa\frac{\partial T}{\partial x},
+\end{equation}
+
+где q -- плотность потока тепла $\left[ \text{Дж}\text{ м}^{-3}\right]$.
+
+Из уравнения \eqref{eq:Fourier's_Law} легко получается уравнение теплопроводности:
+
+\begin{equation}\label{eq:thermal_conductivity}
+\rho C_{\textit{v}}^{(m)}\frac{\partial T}{\partial t} = \varkappa\frac{\partial T}{\partial x},
+\end{equation}
+
+где $C_{\textit{v}}^{(m)}$ -- удельная теплоёмкость вещества при постоянном объёме.
+
+Это уравнение можно переписать следующим образом:
+
+\[
+\frac{\partial T}{\partial t} = \chi\frac{\partial T}{\partial x},
+\]
+
+$\chi$ называется температуропроводностью и имеет размерность коэффициента диффузии, что показывает родство процессов переноса (для вязкости можно ввести кинематическую вязкость с той же самой размерностью).
+
+Рассмотрим систему уравнений Максвеллав в дифференциальной форме:
+
+\[ \left\{
+	\begin{aligned}
+		\divergence \textbf{D} &= 4\pi\rho_{out} \\
+		\rot \textbf{E} &= - \frac{1}{c} \frac{\partial \textbf{B}}{\partial t} \\
+		\divergence \textbf{B} &= 0 \\
+		\rot \textbf{H} &= \frac{4 \pi}{c} \textbf{j}_{out} + \frac{1}{c} \frac{\partial \textbf{D}}{\partial t}
+	\end{aligned}
+\right.
+\]
+
+\section{Интегралы}\label{integrals}
+
+Рассмотрим функцию Римана:
+
+\[
+f_R(x) = \begin{cases}
+	\cfrac{1}{q}, &\text{if } x = \cfrac{p}{q} \text{ where } p \in \mathbb{Z}, q \in \mathbb{N} \\
+	0, &\text{if } x \in \mathbb{R} \backslash \mathbb{Q} 
+\end{cases}
+\]
+
+Эта функция интересна тем, что $f_R \in R(\mathbb{R})$, то есть интегрируема по Риману на всей числовой прямой.
+Этот факт можно доказать с помощью критерия Лебега интегрируемости по Риману (как упражнение покажите, что лебегова мера точек разрыва этой функции равна нулю).
+
+Давайте объясним формулу \eqref{eq:lim_sum_pi_4}, которая нам встретилась на странице \pageref{eq:lim_sum_pi_4}.
+
+\section{Матрицы}\label{Matrix} 
+
+Смотри, матрица!!!!!
+\[ 
+\left|\left| 
+\begin{array}{cc} 
+1 & 2\\ 
+3 & 4\\ 
+5 & 6
+\end{array} 
+\right|\right| 
+\]  
+
+Представим, что у нас есть отображение $\varphi \in L(V, \tilde{V})$, которое в паре базисов e и f имеет матрицу A.
+Рассмторим частный случай линейного отображения, а именно линейное преобразование ($\tilde{V} = V$). Пусть $\dim V = 3$ и $\varphi$ в паре базисов e и e имеет матрицу:
+\[
+	\begin{pmatrix}
+		0 & 1 & 0 \\
+		0 & 0 & 1 \\
+		0 & 0 & 0 \\
+	\end{pmatrix}
+\]
+Каков же геометрический смысл данного преобразования?
+Вспомним смысл матрицы линейного преобразования: в столбцах стоят координаты базисных векторов новом (хотя в нашем случае он же и старый) базасе.
+То есть одномерное подпространство $\langle\textbf{e}_1\rangle$ отобразилось в нуль, $\langle\textbf{e}_2\rangle$ перешло в $\langle\textbf{e}_1\rangle$, а $\langle\textbf{e}_3\rangle$ в $\langle\textbf{e}_2\rangle$.
+Так мы можем с помощью геометрических представлений понять каково ядро и образ нашего преобразования $\varphi$:
+
+
+\begin{align*}
+	\ker \varphi &= \langle\textbf{e}_1\rangle,\\
+	\im \varphi &= \langle\textbf{e}_1, \textbf{e}_2\rangle
+.\end{align*}
+
+Хороший способ вывода матрицы:
+
+\[ 
+\left( 
+\begin{array}{cccc} 
+a_{11} & a_{12} & \ldots & a_{1m}\\ 
+a_{21} & a_{22} & \ldots & a_{2m}\\ 
+\vdots & \vdots & \ddots & \vdots\\ 
+a_{n1} & a_{n2} & \ldots & a_{nm} 
+\end{array} 
+\right) 
+\] 
+
+\[ 
+\begin{pmatrix} 
+a_{11} & a_{12} & \ldots & a_{1m} \\
+a_{21} & a_{22} & \ldots & a_{2m} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \ldots & a_{nm} 
+\end{pmatrix} 
+\]
+
+\end{document} % Конец текста.

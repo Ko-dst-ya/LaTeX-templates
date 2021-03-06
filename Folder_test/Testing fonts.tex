@@ -1,0 +1,188 @@
+\documentclass[a4paper,12pt]{article}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+%\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+\usepackage{indentfirst}
+\frenchspacing
+
+\renewcommand{\epsilon}{\ensuremath{\varepsilon}}
+\renewcommand{\phi}{\ensuremath{\varphi}}
+\renewcommand{\kappa}{\ensuremath{\varkappa}}
+\renewcommand{\le}{\ensuremath{\leqslant}}
+\renewcommand{\leq}{\ensuremath{\leqslant}}
+\renewcommand{\ge}{\ensuremath{\geqslant}}
+\renewcommand{\geq}{\ensuremath{\geqslant}}
+\renewcommand{\emptyset}{\varnothing}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+\usepackage{mathrsfs}
+
+%% Номера формул
+%\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+%\usepackage{leqno} % Нумереация формул слева
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\graphicspath{{images/}{images2/}}  % папки с картинками
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+%%% Теоремы
+\theoremstyle{plain} % Это стиль по умолчанию, его можно не переопределять.
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{proposition}[theorem]{Утверждение}
+ 
+\theoremstyle{definition} % "Определение"
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{problem}{Задача}[section]
+ 
+\theoremstyle{remark} % "Примечание"
+\newtheorem*{nonum}{Решение}
+
+%%% Программирование
+\usepackage{etoolbox} % логические операторы
+
+%%% Страница
+\usepackage{extsizes} % Возможность сделать 14-й шрифт
+\usepackage{geometry} % Простой способ задавать поля
+	\geometry{top=25mm}
+	\geometry{bottom=35mm}
+	\geometry{left=35mm}
+	\geometry{right=20mm}
+ %
+%\usepackage{fancyhdr} % Колонтитулы
+% 	\pagestyle{fancy}
+ 	%\renewcommand{\headrulewidth}{0pt}  % Толщина линейки, отчеркивающей верхний колонтитул
+% 	\lfoot{Нижний левый}
+% 	\rfoot{Нижний правый}
+% 	\rhead{Верхний правый}
+% 	\chead{Верхний в центре}
+% 	\lhead{Верхний левый}
+%	\cfoot{Нижний в центре} % По умолчанию здесь номер страницы
+
+\usepackage{setspace} % Интерлиньяж
+%\onehalfspacing % Интерлиньяж 1.5
+%\doublespacing % Интерлиньяж 2
+%\singlespacing % Интерлиньяж 1
+
+\usepackage{lastpage} % Узнать, сколько всего страниц в документе.
+
+\usepackage{soul} % Модификаторы начертания
+
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames,svgnames,table,rgb]{xcolor}
+\hypersetup{				% Гиперссылки
+    unicode=true,           % русские буквы в раздела PDF
+    pdftitle={Заголовок},   % Заголовок
+    pdfauthor={Автор},      % Автор
+    pdfsubject={Тема},      % Тема
+    pdfcreator={Создатель}, % Создатель
+    pdfproducer={Производитель}, % Производитель
+    pdfkeywords={keyword1} {key2} {key3}, % Ключевые слова
+    colorlinks=true,       	% false: ссылки в рамках; true: цветные ссылки
+    linkcolor=red,          % внутренние ссылки
+    citecolor=black,        % на библиографию
+    filecolor=magenta,      % на файлы
+    urlcolor=cyan           % на URL
+}
+
+\usepackage{csquotes} % Еще инструменты для ссылок
+
+%\usepackage[style=authoryear,maxcitenames=2,backend=biber,sorting=nty]{biblatex}
+
+\usepackage{multicol} % Несколько колонок
+
+\usepackage{tikz} % Работа с графикой
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\author{}
+\title{Латинские буквы в разных шрифтах}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Regular font & \verb"\mathfrak" & \verb"\mathscr" & \verb"\mathcal" &  \verb"\mathbb" \\
+\hline 
+A & $\mathfrak{A}$ & $\mathscr{A}$ & $\mathcal{A}$ & $\mathbb{A}$ \\ 
+\hline 
+B & $\mathfrak{B}$ & $\mathscr{B}$ & $\mathcal{B}$ & $\mathbb{B}$ \\ 
+\hline 
+C & $\mathfrak{C}$ & $\mathscr{C}$ & $\mathcal{C}$ & $\mathbb{C}$ \\ 
+\hline 
+D & $\mathfrak{D}$ & $\mathscr{D}$ & $\mathcal{D}$ & $\mathbb{D}$ \\ 
+\hline 
+E & $\mathfrak{E}$ & $\mathscr{E}$ & $\mathcal{E}$ & $\mathbb{E}$ \\ 
+\hline 
+F & $\mathfrak{F}$ & $\mathscr{F}$ & $\mathcal{F}$ & $\mathbb{F}$ \\ 
+\hline 
+G & $\mathfrak{G}$ & $\mathscr{G}$ & $\mathcal{G}$ &  $\mathbb{G}$ \\ 
+\hline 
+H & $\mathfrak{H}$ & $\mathscr{H}$ & $\mathcal{H}$ &  $\mathbb{H}$ \\ 
+\hline 
+I & $\mathfrak{I}$ & $\mathscr{I}$ & $\mathcal{I}$ &  $\mathbb{I}$ \\ 
+\hline 
+J & $\mathfrak{J}$ & $\mathscr{J}$ & $\mathcal{J}$ &  $\mathbb{G}$ \\ 
+\hline 
+K & $\mathfrak{K}$ & $\mathscr{K}$ & $\mathcal{K}$ &  $\mathbb{K}$ \\ 
+\hline 
+L & $\mathfrak{L}$ & $\mathscr{L}$ & $\mathcal{L}$ &  $\mathbb{L}$ \\ 
+\hline 
+M & $\mathfrak{M}$ & $\mathscr{M}$ & $\mathcal{M}$ &  $\mathbb{M}$ \\ 
+\hline 
+N & $\mathfrak{N}$ & $\mathscr{N}$ & $\mathcal{N}$ &  $\mathbb{N}$ \\ 
+\hline 
+O & $\mathfrak{O}$ & $\mathscr{O}$ & $\mathcal{O}$ &  $\mathbb{O}$ \\ 
+\hline 
+P & $\mathfrak{P}$ & $\mathscr{P}$ & $\mathcal{P}$ &  $\mathbb{P}$ \\ 
+\hline 
+Q & $\mathfrak{Q}$ & $\mathscr{Q}$ & $\mathcal{Q}$ &  $\mathbb{Q}$ \\ 
+\hline 
+R & $\mathfrak{R}$ & $\mathscr{R}$ & $\mathcal{R}$ &  $\mathbb{R}$ \\ 
+\hline 
+S & $\mathfrak{S}$ & $\mathscr{S}$ & $\mathcal{S}$ &  $\mathbb{S}$ \\ 
+\hline 
+T & $\mathfrak{T}$ & $\mathscr{T}$ & $\mathcal{T}$ &  $\mathbb{T}$ \\ 
+\hline 
+U & $\mathfrak{U}$ & $\mathscr{U}$ & $\mathcal{U}$ &  $\mathbb{U}$ \\ 
+\hline 
+V & $\mathfrak{V}$ & $\mathscr{V}$ & $\mathcal{V}$ &  $\mathbb{V}$ \\ 
+\hline 
+W & $\mathfrak{W}$ & $\mathscr{W}$ & $\mathcal{W}$ &  $\mathbb{W}$ \\ 
+\hline 
+X & $\mathfrak{X}$ & $\mathscr{X}$ & $\mathcal{X}$ &  $\mathbb{X}$ \\ 
+\hline 
+Y & $\mathfrak{Y}$ & $\mathscr{Y}$ & $\mathcal{Y}$ &  $\mathbb{Y}$ \\ 
+\hline 
+Z & $\mathfrak{Z}$ & $\mathscr{Z}$ & $\mathcal{Z}$ &  $\mathbb{Z}$ \\  
+\hline 
+\end{tabular} 
+%\mathfrak{A B C D E F G H I J K L M N O P Q R S T U V W X Y Z}\\
+%\mathscr{A B C D E F G H I J K L M N O P Q R S T U V W X Y Z}
+
+
+\end{document}
+

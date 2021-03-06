@@ -1,0 +1,259 @@
+\documentclass[a4paper,12pt]{article}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+%\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+\usepackage{mathrsfs} % Красивый шрифт
+
+%% Номера формул
+%\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+%\usepackage{leqno} % Нумерация формул слева
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}} % Функция знака 
+\DeclareMathOperator{\card}{\mathop{card}} % Мощность множества
+\DeclareMathOperator{\im}{\mathop{Im}} % Образ отображения
+\DeclareMathOperator{\divergence}{\mathop{div}} % Дивергенция
+\DeclareMathOperator{\rot}{\mathop{rot}} % Ротор
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\graphicspath{{images/}{images2/}}  % папки с картинками
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+%%% Теоремы
+%\style{plain} % Это стиль по умолчанию, его можно не переопределять.
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{proposition}[theorem]{Утверждение}
+ 
+\theoremstyle{definition} % "Определение"
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{problem}{Задача}[section]
+ 
+\theoremstyle{remark} % "Примечание"
+\newtheorem*{nonum}{Решение}
+
+%%% Программирование
+\usepackage{etoolbox} % логические операторы
+
+%%%% Страница
+%\usepackage{extsizes} % Возможность сделать 14-й шрифт
+%\usepackage{geometry} % Простой способ задавать поля
+%	\geometry{top=25mm}
+%	\geometry{bottom=35mm}
+%	\geometry{left=35mm}
+%	\geometry{right=20mm}
+% %
+%\usepackage{fancyhdr} % Колонтитулы
+% 	\pagestyle{fancy}
+% 	\renewcommand{\headrulewidth}{0mm}  % Толщина линейки, отчеркивающей верхний колонтитул
+% 	\lfoot{Нижний левый}
+% 	\rfoot{Нижний правый}
+% 	\rhead{Верхний правый}
+% 	\chead{Верхний в центре}
+% 	\lhead{Верхний левый}
+% 	% \cfoot{Нижний в центре} % По умолчанию здесь номер страницы
+%
+%\usepackage{setspace} % Интерлиньяж
+%%\onehalfspacing % Интерлиньяж 1.5
+%%\doublespacing % Интерлиньяж 2
+%%\singlespacing % Интерлиньяж 1
+%
+%\usepackage{lastpage} % Узнать, сколько всего страниц в документе.
+%
+%\usepackage{soul} % Модификаторы начертания
+%
+%\usepackage{hyperref}
+%\usepackage[usenames,dvipsnames,svgnames,table,rgb]{xcolor}
+%\hypersetup{				% Гиперссылки
+%    unicode=true,           % русские буквы в раздела PDF
+%    pdftitle={Заголовок},   % Заголовок
+%    pdfauthor={Автор},      % Автор
+%    pdfsubject={Тема},      % Тема
+%    pdfcreator={Создатель}, % Создатель
+%    pdfproducer={Производитель}, % Производитель
+%    pdfkeywords={keyword1} {key2} {key3}, % Ключевые слова
+%    colorlinks=true,       	% false: ссылки в рамках; true: цветные ссылки
+%    linkcolor=red,          % внутренние ссылки
+%    citecolor=green,        % на библиографию
+%    filecolor=magenta,      % на файлы
+%    urlcolor=cyan           % на URL
+%}
+
+%\renewcommand{\familydefault}{\sfdefault} % Начертание шрифта
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\rfoot{\LaTeX{}} 
+
+\usepackage{multicol} % Несколько колонок
+
+\author{Счётчики и макрокоманды \LaTeX{}}
+\title{3 Неделя \LaTeX{}}
+\date{30 июня 2020}
+
+\begin{document} % конец преамбулы, начало документа
+
+\maketitle
+
+
+% Счётчик
+\newcounter{nc}[section]
+
+
+% Шаблон для задач
+\newcommand{\z}[1]{%
+
+\addtocounter{nc}{1} % 1 арг. - счётчик; 2 - на сколько его надо увеличить
+\textit{\textbf{Задача \thesection.\arabic{nc}.}}\\ #1 \\%
+}
+
+
+
+\renewcommand{\thesection}{\Roman{section}}
+
+
+\section{Некоторые теоремы из математики}\label{sec:math_theorems}
+
+% Шаблон: подмножество R
+\newcommand{\subsetR}[1]{\ensuremath{%
+#1 \subset \mathbb{R}}%
+} % 1 арг. - название для LaTeX; 2 (необ.) - кол-во аргументов в новой команде (н.к); 3 - описание действия н.к., которая пользуется аргументами, \ensuremath позволяет не ставить значок $ для перехода в мат. реж., #N - N-ый арг. н.к. 
+
+
+% Шаблон: подмножество R^n
+\newcommand{\subsetRn}[1]{\ensuremath{%
+#1 \subset \mathbb{R}^n}%
+}
+
+
+% Шаблон: Лебегова мера 0
+\newcommand{\Lmz}[1]{\ensuremath{%
+\mathscr{L}_1 (#1) = 0}%
+}
+
+
+% Шаблон для ссылки на номера страниц с формулами
+\newcommand{\str}[1]{%
+на стр. #1%
+}
+
+% Переобозначение 
+\renewcommand{\le}{\leqslant}
+
+
+\begin{theorem}[Критерий Лебега интегрируемости по Риману]\label{Lebesgue_and_Riemann}
+	Функция f инегрируема по Риману на отрезке \subsetR{[a, b]} тогда и только тогда, когда:\\
+	1) f ограничена; \\
+	2) \Lmz{E}, где E - множество всех точек разрыва функции f на отрезке $[a, b]$.
+\end{theorem}
+
+Из теоремы \ref{Lebesgue_and_Riemann} вытекает следующее
+
+\begin{corollary}
+Функция
+\begin{equation}
+f(x) =
+\left\{
+	\begin{aligned}
+		\sin \frac{1}{x}&, \  x \neq 0; \\
+		0&, \  otherwise
+	\end{aligned}
+\right.
+\end{equation}
+интегрируема на любом отрезке $[a, b] \subset \mathbb{R}$.
+\end{corollary}
+
+\begin{nonum}
+Очевидно, что $f(x)$ ограничена на $\forall$ \subsetR{[a, b]} единицей, т.е.: \\
+\[
+	|f(x)| \le 1, \text{ } \forall \ a \le b \in \mathbb{R}
+\]
+Если $ 0 \notin [a, b]$, то, очевидно, \Lmz{E} (т.к. $E = \varnothing$).\\
+Иначе ($ 0 \in [a, b]$) $E = \{0\}$, но всё равно \Lmz{E}, т.к. лебегова мера не более чем счётного множества равна нулю.
+\end{nonum}
+
+\begin{corollary}
+Функция
+\[
+f_R(x) = \begin{cases}
+	\cfrac{1}{q}, &\text{if } x = \cfrac{p}{q} \text{ where } p \in \mathbb{Z}, q \in \mathbb{N} \\
+	0, &\text{if } x \in \mathbb{R} \backslash \mathbb{Q} 
+\end{cases}
+\]
+
+интегрируема на любом \subsetR{[a, b]}.
+\end{corollary}
+
+\z{Докажите это самостоятельно.}
+
+Теорема \ref{Lebesgue_and_Riemann} (\str{\pageref{Lebesgue_and_Riemann}}) -- мощный аппарат для исследования интегрируемости по Риману в собственном смысле, ведь она отвечает на вопрос: <<Какие функции интегрируемы на отрезке по Риману, а какие нет?>>
+
+\section{Разнообразные задачки}\label{sec:probs}
+
+\newcommand{\znum}[2]{#1.#2}
+
+Предложим читателю для размышления пару известных задачек.
+
+\z{Предположим, что \subsetRn{A}. Известно, что $A'$ -- конечное множество.\\
+Доказать, что $\card A \le \aleph_0$.\\
+\textit{\underline{Напоминание:}} Для произвольного м-ва $A$ из метрического простванства $A'$ -- <<производное множество>>, т.е. мн-во всех предельных точек $A$.}\label{prob:sets}
+
+\z{Смешали две кислоты: $Ac_1$ и $Ac_2$ в соотношении 1:1. В результате превращения образовались в соотношении 2:1 вещества:
+серная кислота и газ $G$ с $\mu (G) \hm{=} 44 \text{ г}/ \text{моль}$.\\
+Определить формулы кислот $Ac_1$ и $Ac_2$ и газа $G$.}\label{prob:chem_2_acids}
+
+
+
+\section{Задачи с ответами}
+
+\newbool{answers}
+
+%\booltrue{answers} % достаточно закомментировать это, чтобы доступные ответы исчезли
+
+% Шаблон для задач с ответами
+\renewcommand{\z}[2][None]{%
+
+\addtocounter{nc}{1}
+\textit{\textbf{Задача \thesection.\arabic{nc}.}}\\ #2 \\%
+\ifbool{answers}{\textit{Ответ:} #1.}{}\\
+}
+
+
+\z[$H_2N_2O_2, H_2S_2O_7, N_2O$]{См. химическую задачу из раздела \ref{sec:probs}.}
+
+\z[Например подойдёт оператор $\varphi: \mathbb{R}^3 \rightarrow \mathbb{R}^3$ с матрицей $A = 
+\begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+\end{pmatrix}
+$]{Приведите пример линейного преобразвания $\varphi: \varphi^3 = 0$.}
+
+\begin{problem}[HEDM]\label{HEDM}
+	Текст задачи.
+\end{problem}
+
+Посмотрим внимательно на условие задачи \ref{HEDM}.
+
+\end{document} % конец документа
+
+

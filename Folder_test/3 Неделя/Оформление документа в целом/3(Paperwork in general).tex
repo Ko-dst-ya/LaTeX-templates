@@ -1,0 +1,216 @@
+\documentclass[a4paper,12pt]{article}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+%\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+%\usepackage{leqno} % Нумерация формул слева
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\graphicspath{{images/}{images2/}}  % папки с картинками
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+%%% Теоремы
+\theoremstyle{plain} % Это стиль по умолчанию, его можно не переопределять.
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{proposition}[theorem]{Утверждение}
+ 
+\theoremstyle{definition} % "Определение"
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{problem}{Задача}[section]
+ 
+\theoremstyle{remark} % "Примечание"
+\newtheorem*{nonum}{Решение}
+
+%%% Программирование
+\usepackage{etoolbox} % логические операторы
+
+%%% Страница
+%\usepackage{extsizes} % Возможность сделать 14-й шрифт
+\usepackage{geometry} % Простой способ задавать поля
+	\geometry{top=25mm}
+	\geometry{bottom=35mm}
+	\geometry{left=35mm}
+	\geometry{right=20mm}
+ %
+\usepackage{fancyhdr} % Колонтитулы
+ 	\pagestyle{fancy}
+ 	\renewcommand{\headrulewidth}{0mm}  % Толщина линейки, отчеркивающей верхний колонтитул
+ 	\lfoot{Нижний левый}
+ 	\rfoot{Нижний правый}
+ 	\rhead{Верхний правый}
+ 	\chead{Верхний в центре}
+ 	\lhead{Верхний левый}
+ 	% \cfoot{Нижний в центре} % По умолчанию здесь номер страницы
+
+\usepackage{setspace} % Интерлиньяж
+%\onehalfspacing % Интерлиньяж 1.5
+%\doublespacing % Интерлиньяж 2
+%\singlespacing % Интерлиньяж 1
+
+\usepackage{lastpage} % Узнать, сколько всего страниц в документе.
+
+\usepackage{soulutf8} % Модификаторы начертания
+
+%%% Гиперссылки
+\usepackage{hyperref}
+\usepackage[usenames,dvipsnames,svgnames,table,rgb]{xcolor}
+\hypersetup{				% Гиперссылки
+    unicode=true,           % русские буквы в раздела PDF
+    pdftitle={Заголовок},   % Заголовок
+    pdfauthor={Автор},      % Автор
+    pdfsubject={Тема},      % Тема
+    pdfcreator={Создатель}, % Создатель
+    pdfproducer={Производитель}, % Производитель
+    pdfkeywords={keyword1} {key2} {key3}, % Ключевые слова
+    colorlinks=true,       	% false: ссылки в рамках; true: цветные ссылки
+    linkcolor=red,          % внутренние ссылки
+    citecolor=green,        % на библиографию
+    filecolor=magenta,      % на файлы
+    urlcolor=Blue           % на URL
+}
+
+%\renewcommand{\familydefault}{\sfdefault} % Начертание шрифта (без засечек)
+
+\usepackage{multicol} % Несколько колонок
+
+\usepackage{pgfplots} %Графики
+
+\usepackage{lscape} % Альбомная ориентация
+
+\author{Оформление документа в целом в \LaTeX{}}
+\title{3 Неделя в \LaTeX}
+\date{1 июля 2020}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Пару слов о МОШ и не только}
+
+Тестируем команду \text{\emph{$\backslash emph$}}:
+
+Я пишу текст с \emph{важным фрагментом, на который я хочу выделить особо, но в нём есть \emph{ещё более важный фрагмент} и я выделяю его по правилам типографии}. Поэтому-то \emph{более важный фрагмент} становится обычным в написании.
+
+Дважды я участвовал в МОШ (московская олимпиада школьников) по химии. В 10-м классе я стал победителем, а в 11-м призёром третьей степени \dots \,да, стыдновато \dots \,На практический тур необходимо было сделать реферат и к реферату предлагался титульный лист со следующей страницы.
+
+Кстати, для написания солова <<\so{РЕФЕРАТ}>> использовалась команда \text{\emph{$\backslash so$}}, однако это не единственный вариант. Можно исользовать команду \text{\emph{$\backslash ,$}}. Она создаёт маленький пробел между словами (буквами): <<Р\,Е\,Ф\,Е\,Р\,А\,Т>>.
+
+Ссылка на этот \href{http://moschem.olimpiada.ru/news/244}{титульник} лежит здесь: \url{http://moschem.olimpiada.ru/news/244}. %\fref{C:\Users\user\Downloads\tit_list.doc}
+
+На экспериментальный тур организаторы призывали принести:
+
+\begin{itemize}
+\item[$\star$] распечатанные из личного кабинета бланки для выполнения работы :
+\begin{enumerate}
+\item титульный лист - 1 шт.,
+\item лист проверки - 1 шт.,
+\item бланки для выполнения работы - 5 шт.; 
+\end{enumerate}
+
+\item документ, удостоверяющий личность; 
+
+\item[$\bigtriangleup$] распечатанный реферат (принимаются и рукописные варианты);
+
+\item[$\diamond$] лабораторный халат и лабораторные перчатки;
+
+\item[$\circlearrowleft$] 2 черные гелевые ручки;
+
+\item[$\clubsuit$] непрограммируемый калькулятор.\\
+\end{itemize}
+
+Некоторые классы органических соединений:
+\begin{enumerate}
+	\begin{multicols}{2}
+		\item Углеводороды
+		\item Галогенпроизводные \\углеводородов
+		\item Кислоты
+		\item Спирты
+		\item Производные кислот
+		\item Карбонильные соединения
+		\item Амины
+	\end{multicols}
+\end{enumerate}
+
+\newpage
+
+\thispagestyle{empty}
+\large{
+\begin{center}
+	\textbf{LXXVI Московская олимпиада школьников по химии \\ \vspace{1em}
+	\Large{Заключительный этап}\\}
+	25 марта 2018 года \\
+		\vspace{2em}
+		\vspace{1ex}
+	Московский технологический университет (МИТХТ)\\
+		\vspace{7em}
+	\so{РЕФЕРАТ}\\
+		\vspace{1em}
+		\vspace{1ex}	
+	\textrm{Тема «Химия меди и её соединений (получение, свойства, качественные реакции соединений меди в степени окисления +I и +II)»}
+\end{center}
+	\vspace{4.5em}
+\begin{flushright}
+%\noindent % без создания нового абзаца
+Выполнил ученик  10  класса \\
+МБОУ <<Лицей <<Физико-техническая школа>>\\
+Кравцов Константин Вадимович
+\end{flushright}
+
+\begin{center}
+\vfill
+Город Обнинск
+\end{center}
+}
+
+\newpage
+
+\section{Парабола}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        xtick = {0,1,5},
+        xticklabels = {{zero},$\alpha$,$\varphi$},
+        extra x ticks = {-4,-2},
+        extra x tick style = {
+                            red,
+                            font=\bfseries
+                            },
+    ]
+    \addplot {x^2 - x +4};
+    \end{axis}
+\end{tikzpicture}
+
+\newpage
+
+\begin{landscape}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+\end{landscape} 
+
+\end{document}
